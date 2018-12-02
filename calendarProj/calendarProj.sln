@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "calendarProj", "calendarProj.csproj", "{F91B225E-ADE1-4F16-9D28-2FED6F9C913F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "..\DAL\DAL.csproj", "{9BC8FF64-A507-4134-ADE8-AAFAF1543D87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F91B225E-ADE1-4F16-9D28-2FED6F9C913F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91B225E-ADE1-4F16-9D28-2FED6F9C913F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91B225E-ADE1-4F16-9D28-2FED6F9C913F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91B225E-ADE1-4F16-9D28-2FED6F9C913F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BC8FF64-A507-4134-ADE8-AAFAF1543D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BC8FF64-A507-4134-ADE8-AAFAF1543D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BC8FF64-A507-4134-ADE8-AAFAF1543D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BC8FF64-A507-4134-ADE8-AAFAF1543D87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0946E9D-4D43-449B-84F0-18F3211B543B}
+	EndGlobalSection
+EndGlobal
