@@ -26,10 +26,7 @@ namespace calendarProj
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowSpecific", p => p.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
-            });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,10 +42,17 @@ namespace calendarProj
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(options =>
+            {
+                options.WithOrigins("http://localhost:4200").AllowAnyMethod();
+            });
+
             app.UseMvc(routeBuilder =>
             {
                 routeBuilder.MapRoute("default", "{controller=EmployeeVacation}/{action=GetEmployeeVacations}/{id?}");
             });
+
         }
     }
 }
