@@ -1,0 +1,7 @@
+<h1>Employees</h1>
+
+<ul>
+  <li *ngFor="let employee of employees" [routerLink]="['edit']" [queryParams]="{id:employee.IDEmployeeVacation}">
+    <p>{{ employee.EmployeeFirstName }} {{ employee.EmployeeLastName }}</p>
+  </li>
+</ul>
