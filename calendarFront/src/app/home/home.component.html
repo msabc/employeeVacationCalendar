@@ -5,3 +5,7 @@
     <p>{{ employee.EmployeeFirstName }} {{ employee.EmployeeLastName }}</p>
   </li>
 </ul>
+
+<div *ngIf="employees == undefined">
+  <p>There are currently no added employees.</p>
+</div>
