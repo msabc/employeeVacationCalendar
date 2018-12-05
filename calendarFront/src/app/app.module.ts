@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { EditComponent } from './edit/edit.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CalendarHeaderComponent } from './calendar-header/calendar-header.compo
     HomeComponent,
     EditComponent,
     CalendarComponent,
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,

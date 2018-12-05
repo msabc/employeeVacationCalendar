@@ -20,7 +20,7 @@ export class EditComponent implements OnInit {
 
     // creating an empty instance to avoid the 'Cannot read property of..' error while still displaying data
     // avoiding the usage of ngIf* which destroys the component if string length is 0
-    this.employee = new EmployeeVacation(null,"","",null,null,null);
+    this.employee = new EmployeeVacation(null,"","",null,new Date(),new Date());
 
     this.leaveTypes = new Array<string>();
 
@@ -48,7 +48,7 @@ export class EditComponent implements OnInit {
             let vacationType = values[3][1] as VacationType;
             let from = values[4][1] as Date;
             let to = values[5][1] as Date;
-
+            
             this.employee = new EmployeeVacation(parseInt(id), employeeFirstName, employeeLastName, vacationType, from, to);
           }
         });

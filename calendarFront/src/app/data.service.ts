@@ -18,6 +18,10 @@ export class DataService {
     return this.http.put<EmployeeVacation>(this.employeeUrl, employeeVacation);
   }
 
+  insertEmployee(employeeVacation: EmployeeVacation){
+    return this.http.post<EmployeeVacation>(this.employeeUrl, employeeVacation);
+  }
+
   /** 
    * Formats the date passed as a parameter into a YYYY/MM/DD format.
    */

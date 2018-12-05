@@ -1,14 +1,16 @@
-<h1>Employee</h1>
+<h1>Add Employee Vacation</h1>
   <div class="formContainer">
   <br/>
   <form (ngSubmit)="onSubmit()">
     <div class="field">
       <label for="name">First name: </label>
       <input 
+      #sth
       type="text" 
       id="firstName"
       name="empFirstName"
-      [(ngModel)]="employee.EmployeeFirstName" required>
+      [(ngModel)]="empFirstName" 
+      required>
     </div>
 
     <div class="field">
@@ -17,7 +19,8 @@
       type="text" 
       id="lastName" 
       name="empLastName"
-      [(ngModel)]="employee.EmployeeLastName" required>
+      [(ngModel)]="empLastName" 
+      required>
     </div>
 
     <div class="field">
@@ -25,7 +28,7 @@
       <select 
       id="leaveType" 
       name="empLeaveType"
-      [(ngModel)]="employee.vacationType"
+      [(ngModel)]="empLeaveType" 
       required >
         <option *ngFor="let type of leaveTypes">{{type}}</option>
       </select>
@@ -37,7 +40,7 @@
       type="date"
       id="from"
       name="empFrom"
-      [(ngModel)]="employee.From"
+      [(ngModel)]="empFrom" 
        >
     </div>
     
@@ -47,10 +50,10 @@
       type="date"
       id="to"
       name="empTo"
-      [(ngModel)]="employee.To"
+      [(ngModel)]="empTo" 
       >
     </div>
 
-    <input type="submit" class="btn btn-primary" value="Submit"/>
+    <input type="submit" class="btn btn-success" value="Add"/>
   </form>
 </div>

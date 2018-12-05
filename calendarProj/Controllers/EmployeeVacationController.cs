@@ -23,7 +23,7 @@ namespace calendarProj.Controllers
             return new JsonResult(repo.GetEmployeeVacations().ToList().FirstOrDefault(emp => emp.IDEmployeeVacation == id));
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public ActionResult<int> UpdateEmployeeVacation([FromBody] EmployeeVacation employeeVacation)
         {
             return new JsonResult(repo.UpdateEmployeeVacation(employeeVacation));
