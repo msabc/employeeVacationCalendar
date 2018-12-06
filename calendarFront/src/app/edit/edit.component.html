@@ -27,6 +27,7 @@
       name="empLeaveType"
       [(ngModel)]="employee.vacationType"
       required >
+        <option value="" selected disabled hidden>Choose Leave type</option>
         <option *ngFor="let type of leaveTypes">{{type}}</option>
       </select>
     </div>

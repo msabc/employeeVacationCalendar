@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {EmployeeVacation, VacationType} from '../app/entities/employeeVacation';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { EmployeeVacation, VacationType } from '../app/entities/employeeVacation';
+import { throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private readonly employeeUrl : string = "https://localhost:44303/api/employeevacation";
+  private readonly employeeUrl: string = "https://localhost:44303/api/employeevacation";
 
   constructor(private http: HttpClient) { }
 
@@ -14,26 +16,48 @@ export class DataService {
     return this.http.get(this.employeeUrl);
   }
 
-  updateEmployee(employeeVacation: EmployeeVacation){
-    return this.http.put<EmployeeVacation>(this.employeeUrl, employeeVacation);
+  updateEmployee(employeeVacation: EmployeeVacation) {
+    return this.http.put<EmployeeVacation>(this.employeeUrl, {
+      IDEmployeeVacation: employeeVacation.IDEmployeeVacation,
+      EmployeeFirstName: employeeVacation.EmployeeFirstName,
+      EmployeeLastName: employeeVacation.EmployeeLastName,
+      Leave: employeeVacation.vacationType,
+      From: employeeVacation.From,
+      To: employeeVacation.To
+    }).pipe(catchError(this.handleError));
   }
 
-  insertEmployee(employeeVacation: EmployeeVacation){
+  insertEmployee(employeeVacation: EmployeeVacation) {
     return this.http.post<EmployeeVacation>(this.employeeUrl, employeeVacation);
   }
 
-  /** 
-   * Formats the date passed as a parameter into a YYYY/MM/DD format.
-   */
-  formatDate(date: Date) : Date{
-    let strDate = date.toLocaleDateString();
-    // date = new Date("Fri Apr 17 2009");
-    // Fri Apr 17 2009 00:00:00 GMT+0200 (Central European Summer Time)
-    // date.toLocaleString()
-    // "4/17/2009, 12:00:00 AM"
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
 
-    let arrStrDate = strDate.split(", ");
-    let arrStr = arrStrDate[0].split("/");
-    return new Date(arrStrDate[2]+"/"+arrStrDate[0]+"/"+arrStrDate[1]);
+    // return an observable with a user-facing error message
+    return throwError(
+      'Something bad happened; please try again later.');
+  };
+
+  updateViaQueryString(employeeVacation: EmployeeVacation) {
+    return this.http.put(this.employeeUrl, {
+      params: {
+        id: employeeVacation.IDEmployeeVacation
+      },
+      observe: 'response'
+    });
   }
+
+  // private setContentType(employee: EmployeeVacation) : string{
+
+  // }
+
 }

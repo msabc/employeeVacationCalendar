@@ -32,7 +32,6 @@ export class EditComponent implements OnInit {
 
     const employeeID: String = this.route.snapshot.queryParamMap.get('id');
 
-
     this.data.getEmployees().subscribe(dat => {
 
       if (dat instanceof Array) {

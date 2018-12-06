@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace DAL
 {
@@ -113,8 +114,8 @@ namespace DAL
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "update EmployeeVacation " +
-                            "set EmployeeName = '" + employeeVacation.EmployeeFirstName + ", " +
-                            "EmployeeLastName = '" + employeeVacation.EmployeeLastName + ", " +
+                            "set EmployeeName = '" + employeeVacation.EmployeeFirstName + "', " +
+                            "EmployeeLastName = '" + employeeVacation.EmployeeLastName + "', " +
                             "Leave = " + (int) employeeVacation.Leave + ", " +
                             "From = " + DateTimeToUnixTimeStamp(employeeVacation.From) + ", " +
                             "To = " + DateTimeToUnixTimeStamp(employeeVacation.To) + 
@@ -124,9 +125,10 @@ namespace DAL
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Debug.WriteLine(ex.Message);
+                return -1;
             }
         }
 

@@ -1,7 +1,11 @@
 ﻿using DAL;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 
 namespace calendarProj.Controllers
 {
@@ -24,9 +28,22 @@ namespace calendarProj.Controllers
         }
 
         [HttpPut]
-        public ActionResult<int> UpdateEmployeeVacation([FromBody] EmployeeVacation employeeVacation)
+        public HttpResponseMessage UpdateEmployeeVacation()
         {
-            return new JsonResult(repo.UpdateEmployeeVacation(employeeVacation));
+            try
+            {
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    var body = reader.ReadToEnd();
+                    var employee = JsonConvert.DeserializeObject<EmployeeVacation>(body);
+                    repo.UpdateEmployeeVacation(employee);
+                    return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+                }
+            }
+            catch (System.Exception)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.Continue);
+            }
         }
 
         [HttpPost]
