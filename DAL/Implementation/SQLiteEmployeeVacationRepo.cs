@@ -26,9 +26,10 @@ namespace DAL
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Debug.WriteLine(ex.Message + ex.StackTrace);
+                return -1;
             }
         }
 
@@ -54,23 +55,30 @@ namespace DAL
                             //string name1 = reader["EmployeeName"].ToString();
                             //string name2 = reader["EmployeeLastName"].ToString();
                             //DateTime dt1 = UnixTimeStampToDateTime(int.Parse(reader["From"].ToString()));
+                            //var sth1 = int.Parse(reader["IDEmployeeVacation"].ToString());
+                            //var sth2 = reader["EmployeeName"].ToString();
+                            //var sth3 = reader["EmployeeLastName"].ToString();
+                            //var sth4 = Enum.Parse<VacationType>(reader["Leave"].ToString());
+                            //var sth5 = UnixTimeStampToDateTime(int.Parse(reader[4].ToString()));
+                            //var sth6 = UnixTimeStampToDateTime(int.Parse(reader[5].ToString()));
 
                             employees.Add(new EmployeeVacation(
                                 int.Parse(reader["IDEmployeeVacation"].ToString()),
                                 reader["EmployeeName"].ToString(),
                                 reader["EmployeeLastName"].ToString(),
-                                Enum.Parse<VacationType>(reader["Leave"].ToString()),
-                                UnixTimeStampToDateTime(int.Parse(reader["From"].ToString())), 
-                                UnixTimeStampToDateTime(int.Parse(reader["To"].ToString()))));
+                                Enum.Parse<VacationType>(reader[4].ToString()),
+                                UnixTimeStampToDateTime(int.Parse(reader["DateFrom"].ToString())), 
+                                UnixTimeStampToDateTime(int.Parse(reader["DateTo"].ToString()))));
                         }
                     }
                 }
 
                 return employees;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Debug.WriteLine(ex.Message + ex.StackTrace);
+                return null;
             }
         }
 
@@ -85,7 +93,7 @@ namespace DAL
                     using (var cmd = connection.CreateCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
-                        cmd.CommandText = "insert into EmployeeVacation('EmployeeName','EmployeeLastName','From','To') values( " +
+                        cmd.CommandText = "insert into EmployeeVacation('EmployeeName','EmployeeLastName','DateFrom','DateTo') values( " +
                             "'" + employeeVacation.EmployeeFirstName + "', " +
                             "'" + employeeVacation.EmployeeLastName + "', " +
                                   DateTimeToUnixTimeStamp(employeeVacation.From) + ", " + DateTimeToUnixTimeStamp(employeeVacation.To) + ");";
@@ -96,9 +104,10 @@ namespace DAL
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Debug.WriteLine(ex.Message + ex.StackTrace);
+                return null;
             }
         }
 
@@ -117,8 +126,8 @@ namespace DAL
                             "set EmployeeName = '" + employeeVacation.EmployeeFirstName + "', " +
                             "EmployeeLastName = '" + employeeVacation.EmployeeLastName + "', " +
                             "Leave = " + (int) employeeVacation.Leave + ", " +
-                            "From = " + DateTimeToUnixTimeStamp(employeeVacation.From) + ", " +
-                            "To = " + DateTimeToUnixTimeStamp(employeeVacation.To) + 
+                            "DateFrom = " + DateTimeToUnixTimeStamp(employeeVacation.From) + ", " +
+                            "DateTo = " + DateTimeToUnixTimeStamp(employeeVacation.To) + 
                             " where IDEmployeeVacation = " + employeeVacation.IDEmployeeVacation + ";";
 
                         return cmd.ExecuteNonQuery();

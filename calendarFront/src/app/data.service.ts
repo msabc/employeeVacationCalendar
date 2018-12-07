@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { EmployeeVacation, VacationType } from '../app/entities/employeeVacation';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -47,17 +47,12 @@ export class DataService {
       'Something bad happened; please try again later.');
   };
 
-  updateViaQueryString(employeeVacation: EmployeeVacation) {
-    return this.http.put(this.employeeUrl, {
-      params: {
-        id: employeeVacation.IDEmployeeVacation
-      },
-      observe: 'response'
-    });
+  removeEmployee(employeeID: Number){
+    const url = `${this.employeeUrl}/?id=${employeeID}`;
+    return this.http.delete<Number>(url)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
-
-  // private setContentType(employee: EmployeeVacation) : string{
-
-  // }
 
 }

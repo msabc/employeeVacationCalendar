@@ -2,8 +2,9 @@
 <h1>Employees</h1>
 
 <ul>
-  <li *ngFor="let employee of employees" [routerLink]="['edit']" [queryParams]="{id:employee.IDEmployeeVacation}">
-    <p>{{ employee.EmployeeFirstName }} {{ employee.EmployeeLastName }}</p>
+  <li *ngFor="let employee of employees">
+    <p [routerLink]="['edit']" [queryParams]="{id:employee.IDEmployeeVacation}">{{ employee.EmployeeFirstName }} {{ employee.EmployeeLastName }}</p>
+    <button class="btn btn-prim" (click)="removeEmployee(employee)">Remove</button>
   </li>
 </ul>
 

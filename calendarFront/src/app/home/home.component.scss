@@ -1,6 +1,7 @@
 #btnAddEmployee{
     float: right;
     margin-top: 25px;
+    margin-right: 35px;
 }
 
 ul {
@@ -37,6 +38,22 @@ ul {
         p {
             font-weight: bold;
             margin-left: 20px;
+            display: inline-block;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+
+        button{
+            background:#ff4750;
+            float: right;
+            color:white;
+            margin-top:9px;
+
+            &:hover{
+                background: #ccc;
+            }
         }
 
         img {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace DAL
 {
@@ -17,7 +18,7 @@ namespace DAL
         public VacationType Leave { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-
+        
         public EmployeeVacation(string employeeFirstName, string employeeLastName, VacationType leave, DateTime from, DateTime to)
         {
             EmployeeFirstName = employeeFirstName;
@@ -27,6 +28,7 @@ namespace DAL
             To = to;
         }
 
+        [JsonConstructor]
         public EmployeeVacation(int id, string employeeFirstName, string employeeLastName, VacationType leave, DateTime from, DateTime to)
         {
             IDEmployeeVacation = id;

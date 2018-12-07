@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,41 +22,63 @@ namespace calendarProj.Controllers
             return new JsonResult(repo.GetEmployeeVacations());
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<EmployeeVacation> GetEmployeeVacations(int id)
-        {
-            return new JsonResult(repo.GetEmployeeVacations().ToList().FirstOrDefault(emp => emp.IDEmployeeVacation == id));
-        }
-
         [HttpPut]
         public HttpResponseMessage UpdateEmployeeVacation()
         {
             try
             {
-                using (var reader = new StreamReader(Request.Body))
-                {
-                    var body = reader.ReadToEnd();
-                    var employee = JsonConvert.DeserializeObject<EmployeeVacation>(body);
-                    repo.UpdateEmployeeVacation(employee);
-                    return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
-                }
+                var employee = ParseRequest<EmployeeVacation>();
+                repo.UpdateEmployeeVacation(employee);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.Continue);
             }
         }
 
         [HttpPost]
-        public ActionResult<int> InsertEmployeeVacation([FromBody] EmployeeVacation employeeVacation)
+        public HttpResponseMessage InsertEmployeeVacation()
         {
-            return new JsonResult(repo.InsertEmployeeVacation(employeeVacation));
+            try
+            {
+                var employee = ParseRequest<EmployeeVacation>();
+                repo.InsertEmployeeVacation(employee);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.Continue);
+            }
         }
 
         [HttpDelete]
-        public ActionResult<int> DeleteEmployeeVacation(int id)
+        public HttpResponseMessage DeleteEmployeeVacation([FromQuery] int id)
         {
-            return new JsonResult(repo.DeleteEmployeeVacation(id));
+            try
+            {
+                repo.DeleteEmployeeVacation(id);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.Continue);
+            }
+        }
+
+        /// <summary>
+        /// Helper method for parsing an object from Request body.
+        /// </summary>
+        /// <typeparam name="T">Type that can be serialized via JSON.</typeparam>
+        /// <returns></returns>
+        private T ParseRequest<T>()
+        {
+            using (var reader = new StreamReader(Request.Body))
+            {
+                var body = reader.ReadToEnd();
+                var employee = JsonConvert.DeserializeObject<T>(body);
+                return employee;
+            }
         }
     }
 }
