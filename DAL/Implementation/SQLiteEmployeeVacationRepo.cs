@@ -21,7 +21,7 @@ namespace DAL
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "delete from EmployeeVacation where IDEmployeeVacation = " + id.ToString();
-
+                        cmd.Connection = connection;
                         return cmd.ExecuteNonQuery();
                     }
                 }
@@ -47,6 +47,7 @@ namespace DAL
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "select * from EmployeeVacation";
+                        cmd.Connection = connection;
 
                         SQLiteDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
@@ -97,6 +98,7 @@ namespace DAL
                             "'" + employeeVacation.EmployeeFirstName + "', " +
                             "'" + employeeVacation.EmployeeLastName + "', " +
                                   DateTimeToUnixTimeStamp(employeeVacation.From) + ", " + DateTimeToUnixTimeStamp(employeeVacation.To) + ");";
+                        cmd.Connection = connection;
 
                         cmd.ExecuteNonQuery();
 
@@ -129,6 +131,7 @@ namespace DAL
                             "DateFrom = " + DateTimeToUnixTimeStamp(employeeVacation.From) + ", " +
                             "DateTo = " + DateTimeToUnixTimeStamp(employeeVacation.To) + 
                             " where IDEmployeeVacation = " + employeeVacation.IDEmployeeVacation + ";";
+                        cmd.Connection = connection;
 
                         return cmd.ExecuteNonQuery();
                     }

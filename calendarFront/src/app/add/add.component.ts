@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VacationType, EmployeeVacation } from '../entities/employeeVacation';
 import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class AddComponent implements OnInit {
 
   private leaveTypes: string[];
   
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private router: Router) { }
 
   ngOnInit() {
 
@@ -34,7 +35,9 @@ export class AddComponent implements OnInit {
   }
 
   onSubmit(){
-    this.employee = new EmployeeVacation(null,this.empFirstName,this.empLastName,this.empLeaveType,this.empFrom,this.empTo);
-    this.data.insertEmployee(this.employee).subscribe();
+    this.employee = new EmployeeVacation(0,this.empFirstName,this.empLastName,this.empLeaveType,this.empFrom,this.empTo);
+    this.data.insertEmployee(this.employee).subscribe(dat => {
+        this.router.navigateByUrl('');
+    });
   }
 }

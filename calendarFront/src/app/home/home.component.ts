@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { EmployeeVacation } from '../entities/employeeVacation';
 import { VacationType } from '../entities/employeeVacation';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   employees: EmployeeVacation[];
 
-  constructor(private data: DataService, private router: Router) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.getEmployees().subscribe(dat => {
@@ -43,7 +42,7 @@ export class HomeComponent implements OnInit {
   removeEmployee(employee) {
     if (confirm("Are you sure you want to delete the records of this employee?")) {
       this.data.removeEmployee(employee.IDEmployeeVacation).subscribe(dat => {
-        this.router.navigateByUrl('');
+        this.ngOnInit();
       });
     }
   }

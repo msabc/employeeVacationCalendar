@@ -28,7 +28,14 @@ export class DataService {
   }
 
   insertEmployee(employeeVacation: EmployeeVacation) {
-    return this.http.post<EmployeeVacation>(this.employeeUrl, employeeVacation);
+    return this.http.post<EmployeeVacation>(this.employeeUrl, {
+      IDEmployeeVacation: employeeVacation.IDEmployeeVacation,
+      EmployeeFirstName: employeeVacation.EmployeeFirstName,
+      EmployeeLastName: employeeVacation.EmployeeLastName,
+      Leave: employeeVacation.vacationType,
+      From: employeeVacation.From,
+      To: employeeVacation.To
+    }).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
