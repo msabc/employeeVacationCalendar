@@ -36,7 +36,7 @@ export class AddComponent implements OnInit {
 
   onSubmit(){
     this.employee = new EmployeeVacation(0,this.empFirstName,this.empLastName,this.empLeaveType,this.empFrom,this.empTo);
-    this.data.insertEmployee(this.employee).subscribe(dat => {
+    this.data.insertEmployee(this.employee).subscribe(() => {
         this.router.navigateByUrl('');
     });
   }

@@ -1,0 +1,36 @@
+div{
+
+    .eventDescription{
+        display: block;
+    }
+
+    .event{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 2px;
+        border-color: #d1e8ff;
+        color: #fff;
+        margin-top:5px;
+        margin-bottom: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #vacation{
+        background-color: rgb(173, 33, 33);
+    }
+
+    #sick{
+        background-color: rgb(30, 144, 255);
+    }
+
+    #holiday{
+        background-color: rgb(227, 188, 8);
+    }
+}
+
+p{
+    display: inline;
+}

@@ -1,11 +1,13 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-header',
   templateUrl: './calendar-header.component.html',
   styleUrls: ['./calendar-header.component.scss']
 })
-export class CalendarHeaderComponent{
+export class CalendarHeaderComponent {
+
+  @ViewChild('today') todayBtn;
 
   @Input()
   view: string;

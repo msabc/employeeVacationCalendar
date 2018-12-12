@@ -1,7 +1,7 @@
 export enum VacationType{
-    VacationLeave,
-    SickLeave,
-    Holiday
+    VacationLeave = 1,
+    SickLeave = 2,
+    Holiday = 3
 }
 
 export class EmployeeVacation{

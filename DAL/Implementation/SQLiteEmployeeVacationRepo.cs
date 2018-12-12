@@ -52,22 +52,11 @@ namespace DAL
                         SQLiteDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            //int sth1 = int.Parse(reader["IDEmployeeVacation"].ToString());
-                            //string name1 = reader["EmployeeName"].ToString();
-                            //string name2 = reader["EmployeeLastName"].ToString();
-                            //DateTime dt1 = UnixTimeStampToDateTime(int.Parse(reader["From"].ToString()));
-                            //var sth1 = int.Parse(reader["IDEmployeeVacation"].ToString());
-                            //var sth2 = reader["EmployeeName"].ToString();
-                            //var sth3 = reader["EmployeeLastName"].ToString();
-                            //var sth4 = Enum.Parse<VacationType>(reader["Leave"].ToString());
-                            //var sth5 = UnixTimeStampToDateTime(int.Parse(reader[4].ToString()));
-                            //var sth6 = UnixTimeStampToDateTime(int.Parse(reader[5].ToString()));
-
                             employees.Add(new EmployeeVacation(
                                 int.Parse(reader["IDEmployeeVacation"].ToString()),
                                 reader["EmployeeName"].ToString(),
                                 reader["EmployeeLastName"].ToString(),
-                                Enum.Parse<VacationType>(reader[4].ToString()),
+                                Enum.Parse<VacationType>(reader["Leave"].ToString()),
                                 UnixTimeStampToDateTime(int.Parse(reader["DateFrom"].ToString())), 
                                 UnixTimeStampToDateTime(int.Parse(reader["DateTo"].ToString()))));
                         }
