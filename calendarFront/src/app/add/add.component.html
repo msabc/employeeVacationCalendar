@@ -1,7 +1,7 @@
 <h1>Add Employee Vacation</h1>
   <div class="formContainer">
   <br/>
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" novalidate>
     <div class="field">
       <label for="name">First name: </label>
       <input 
@@ -12,6 +12,9 @@
       [(ngModel)]="empFirstName" 
       required>
     </div>
+    <!-- <div [style.display]="empFirstNameValid ? 'block' : 'none'">
+      <p>First name is a mandatory field.</p>
+    </div> -->
 
     <div class="field">
       <label for="alterEgo">Last name: </label>
@@ -19,9 +22,12 @@
       type="text" 
       id="lastName" 
       name="empLastName"
-      [(ngModel)]="empLastName" 
+      [(ngModel)]="empLastName"
       required>
     </div>
+    <!-- <div [style.display]="empLastNameValid ? 'block' : 'none'">
+        <p>Last name is a mandatory field.</p>
+      </div> -->
 
     <div class="field">
       <label for="leaveType">Leave type: </label>

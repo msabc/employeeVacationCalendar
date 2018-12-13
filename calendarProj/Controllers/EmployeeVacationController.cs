@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
 
 namespace calendarProj.Controllers
 {
@@ -15,52 +13,52 @@ namespace calendarProj.Controllers
         private readonly IEmployeeVacationRepo repo = new SQLiteEmployeeVacationRepo();
 
         [HttpGet]
-        public ActionResult<IEnumerable<EmployeeVacation>> GetEmployeeVacations()
+        public IActionResult GetEmployeeVacations()
         {
-            return new JsonResult(repo.GetEmployeeVacations());
+            return Ok(repo.GetEmployeeVacations());
         }
 
         [HttpPut]
-        public HttpResponseMessage UpdateEmployeeVacation()
+        public IActionResult UpdateEmployeeVacation()
         {
             try
             {
                 var employee = ParseRequest<EmployeeVacation>();
                 repo.UpdateEmployeeVacation(employee);
-                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+                return Ok();
             }
             catch (Exception)
             {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.Continue);
+                return NotFound();
             }
         }
 
         [HttpPost]
-        public HttpResponseMessage InsertEmployeeVacation()
+        public IActionResult InsertEmployeeVacation()
         {
             try
             {
                 var employee = ParseRequest<EmployeeVacation>();
                 repo.InsertEmployeeVacation(employee);
-                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+                return Ok();
             }
             catch (Exception)
             {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.Continue);
+                return NotFound();
             }
         }
 
         [HttpDelete]
-        public HttpResponseMessage DeleteEmployeeVacation([FromQuery] int id)
+        public IActionResult DeleteEmployeeVacation([FromQuery] int id)
         {
             try
             {
                 repo.DeleteEmployeeVacation(id);
-                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+                return Ok();
             }
             catch (Exception)
             {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.Continue);
+                return NotFound();
             }
         }
 
