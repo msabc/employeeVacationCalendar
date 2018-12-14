@@ -10,7 +10,7 @@ The application is divided into **3 parts**:
 | calendarProj  | backend  | .NET Core WebAPI  |
 | DAL           | data     | .NET Core library |
 
-Backend (server-side) is served on **https://localhost:44303/api/employeevacation**
+Backend (server-side) is served on **https://localhost:44303/api/employeevacation** \
 Frontend (client-side) is served on **https://localhost:4200** (default Angular port)
 
 To run the application, clone the project and open the **calendarProj.sln** (Visual Studio solution) file.
@@ -33,4 +33,6 @@ Go to the **calendarFront** folder and run the next commands:
 
 Open your browser on the default angular port _http://localhost:4200_.
 
+### Disclaimer
 
+Calendar component borrowed from: _https://github.com/mattlewis92/angular-calendar_
